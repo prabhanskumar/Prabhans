@@ -3,15 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Prabhans Kumar | Portfolio</title>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+.aurora {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(56,189,248,.25), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(167,139,250,.25), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(34,197,94,.25), transparent 40%);
+  filter: blur(80px);
+  animation: auroraMove 20s ease-in-out infinite alternate;
+}
+
+@keyframes auroraMove {
+  from { transform: translateY(-10%) translateX(-10%); }
+  to   { transform: translateY(10%) translateX(10%); }
+}
+
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#020617;
+  background: linear-gradient(-45deg,#020617,#0f172a,#020617,#1e293b);
+  background-size:400% 400%;
+  animation: gradientBG 10s ease infinite;
   color:white;
+  background:#020617;
+
 }
+
+@keyframes gradientBG{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
 header{
   background:#020617;
   padding:20px;
@@ -48,6 +81,13 @@ nav a{
   border-radius:5px;
   text-decoration:none;
   font-weight:bold;
+  box-shadow:0 0 15px #38bdf8;
+  transition:0.3s;
+}
+
+.btn:hover{
+  box-shadow:0 0 30px #38bdf8;
+  transform:scale(1.05);
 }
 section{
   padding:80px 20px;
@@ -69,16 +109,35 @@ section{
   background:#1e293b;
   padding:20px;
   border-radius:10px;
+  transition:0.3s;
 }
+
+.card:hover{
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:0 20px 40px rgba(56,189,248,0.4);
+}
+
 footer{
   background:#020617;
   padding:15px;
   text-align:center;
 }
+#particles-js{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
 </style>
 </head>
 
 <body>
+<div id="particles-js"></div>
+
+<div class="aurora"></div>
 
 <header>
   <nav>
@@ -144,6 +203,25 @@ footer{
 <footer>
   <p>© 2026 Prabhans Kumar. All rights reserved.</p>
 </footer>
+<script>
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 80 },
+    color: { value: "#38bdf8" },
+    shape: { type: "circle" },
+    opacity: { value: 0.5 },
+    size: { value: 3 },
+    line_linked: { enable: true, color: "#38bdf8" },
+    move: { enable: true, speed: 2 }
+  },
+  interactivity: {
+    events: {
+      onhover: { enable: true, mode: "repulse" }
+    }
+  }
+});
+</script>
 
 </body>
 </html>
+  
