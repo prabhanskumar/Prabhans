@@ -2,13 +2,47 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Prabhans Kumar | Portfolio</title>
+<title>Prabhans Kumar | Footballer, Flute Artist &amp; Web Developer Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<meta name="description" content="Prabhans Kumar — footballer, flute artist and web developer. A futuristic 3D portfolio built with Three.js.">
+<meta name="author" content="Prabhans Kumar">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#020617">
+<!-- Open Graph / Twitter Card — social preview metadata -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Prabhans Kumar | Footballer, Flute Artist & Web Developer">
+<meta property="og:description" content="Footballer, flute artist and web developer. A futuristic 3D portfolio built with Three.js.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Prabhans Kumar | Portfolio">
+<meta name="twitter:description" content="Footballer, flute artist and web developer. A futuristic 3D portfolio built with Three.js.">
+<!-- Lightweight inline favicon — a glowing cyan orb matching the site's brand, no extra network request -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%2302061a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%2338bdf8'/%3E%3Ccircle cx='13' cy='13' r='3' fill='%23a78bfa' opacity='.8'/%3E%3C/svg%3E">
+<!-- Structured data for richer search results -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Prabhans Kumar",
+  "description": "Footballer, flute artist and web developer.",
+  "email": "mailto:mauryaprabhans@gmail.com",
+  "telephone": "+91-6299646432",
+  "jobTitle": ["Footballer", "Flute Artist", "Web Developer"]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<!-- Loaded as a real stylesheet link (not @import) so the browser's preload scanner can fetch it
+     in parallel instead of discovering it only after the inline <style> block is parsed. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
-
+:root{
+  --clr-cyan:#38bdf8; --clr-violet:#a78bfa; --clr-green:#34d399;
+  --clr-bg:#000005; --clr-panel:rgba(30,41,59,.5); --clr-border:rgba(56,189,248,.15);
+}
 *{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} }
 
 /* ── INTRO ── */
 #intro{
@@ -56,12 +90,23 @@
 body{
   font-family:'Rajdhani',sans-serif;
   background:#000005;color:#fff;overflow-x:hidden;
+  line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
 }
+/* Visible only when focused — lets keyboard users jump straight past the header nav */
+.skip-link{
+  position:absolute;left:16px;top:-60px;z-index:10000;
+  background:#0b1220;color:#38bdf8;padding:12px 20px;border-radius:8px;
+  border:1px solid rgba(56,189,248,.5);font-family:'Orbitron',monospace;
+  font-size:12px;letter-spacing:2px;text-decoration:none;
+  transition:top .25s ease;
+}
+.skip-link:focus{top:16px;}
 
 /* ── HEADER ── */
 header{
   background:rgba(2,6,23,.75);padding:18px 40px;
   position:sticky;top:0;z-index:100;
+  -webkit-backdrop-filter:blur(20px);
   backdrop-filter:blur(20px);
   border-bottom:1px solid rgba(56,189,248,.15);
 }
@@ -70,9 +115,15 @@ nav h2{font-family:'Orbitron',monospace;font-size:20px;color:#38bdf8;letter-spac
 nav a{
   color:rgba(255,255,255,.7);margin-left:25px;text-decoration:none;
   font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;
-  transition:color .3s,text-shadow .3s;
+  transition:color .3s,text-shadow .3s;position:relative;display:inline-block;
 }
 nav a:hover{color:#38bdf8;text-shadow:0 0 15px #38bdf8;}
+.nav-underline{
+  position:absolute;left:0;bottom:-4px;width:100%;height:2px;
+  background:linear-gradient(90deg,#38bdf8,#a78bfa);
+  border-radius:2px;transform:scaleX(0);transform-origin:left;
+  box-shadow:0 0 8px #38bdf8;pointer-events:none;
+}
 
 /* ── HERO ── */
 .hero{
@@ -85,12 +136,11 @@ nav a:hover{color:#38bdf8;text-shadow:0 0 15px #38bdf8;}
   font-size:13px;letter-spacing:5px;color:#a78bfa;
   text-transform:uppercase;margin-bottom:20px;
   font-family:'Orbitron',monospace;
-  animation:fadeUp 1s ease .3s both;
 }
 .hero h1{
   font-family:'Orbitron',monospace;
   font-size:clamp(32px,6vw,70px);font-weight:900;line-height:1.1;
-  margin-bottom:20px;animation:fadeUp 1s ease .5s both;
+  margin-bottom:20px;
 }
 .hero h1 .name{
   background:linear-gradient(135deg,#38bdf8,#a78bfa,#34d399);
@@ -98,22 +148,25 @@ nav a:hover{color:#38bdf8;text-shadow:0 0 15px #38bdf8;}
 }
 .hero-sub{
   font-size:18px;color:rgba(255,255,255,.6);letter-spacing:3px;
-  margin-bottom:40px;animation:fadeUp 1s ease .7s both;
+  margin-bottom:40px;
 }
 .hero-sub span{color:#38bdf8;}
-.hero-btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;animation:fadeUp 1s ease .9s both;}
+.hero-btns{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;}
 .btn{
   display:inline-block;padding:14px 32px;border-radius:6px;
   font-family:'Orbitron',monospace;font-size:12px;letter-spacing:3px;
-  text-transform:uppercase;text-decoration:none;font-weight:700;transition:all .3s;
+  text-transform:uppercase;text-decoration:none;font-weight:700;transition:box-shadow .3s,background .3s,border-color .3s;
+  position:relative;overflow:hidden;
 }
 .btn-primary{
   background:linear-gradient(135deg,#38bdf8,#a78bfa);color:#000;
   box-shadow:0 0 30px rgba(56,189,248,.4);
 }
-.btn-primary:hover{box-shadow:0 0 50px rgba(56,189,248,.7);transform:translateY(-3px) scale(1.05);}
+.btn-primary:hover{box-shadow:0 0 50px rgba(56,189,248,.7);}
 .btn-outline{border:1px solid rgba(56,189,248,.5);color:#38bdf8;background:rgba(56,189,248,.05);}
-.btn-outline:hover{border-color:#38bdf8;background:rgba(56,189,248,.1);box-shadow:0 0 25px rgba(56,189,248,.3);transform:translateY(-3px);}
+.btn-outline:hover{border-color:#38bdf8;background:rgba(56,189,248,.1);box-shadow:0 0 25px rgba(56,189,248,.3);}
+.btn:focus-visible{outline:2px solid #38bdf8;outline-offset:3px;box-shadow:0 0 20px rgba(56,189,248,.6);}
+nav a:focus-visible{outline:2px solid #38bdf8;outline-offset:4px;border-radius:2px;}
 
 /* Floating hero planet (CSS) */
 .planet{
@@ -140,7 +193,7 @@ section{padding:100px 20px;max-width:1100px;margin:0 auto;position:relative;z-in
   font-family:'Orbitron',monospace;font-size:11px;letter-spacing:6px;
   color:#a78bfa;text-transform:uppercase;margin-bottom:10px;
 }
-.section-title{font-family:'Orbitron',monospace;font-size:clamp(24px,4vw,42px);font-weight:900;margin-bottom:50px;}
+.section-title{font-family:'Orbitron',monospace;font-size:clamp(24px,4vw,42px);font-weight:900;margin:0 0 50px;}
 .section-title span{color:#38bdf8;}
 
 /* ── ABOUT ── */
@@ -150,9 +203,10 @@ section{padding:100px 20px;max-width:1100px;margin:0 auto;position:relative;z-in
 .stat-box{
   background:rgba(30,41,59,.5);border:1px solid rgba(56,189,248,.15);
   border-radius:12px;padding:25px;text-align:center;
+  -webkit-backdrop-filter:blur(10px);
   backdrop-filter:blur(10px);transition:all .3s;
 }
-.stat-box:hover{border-color:rgba(56,189,248,.5);box-shadow:0 0 30px rgba(56,189,248,.15);transform:translateY(-5px);}
+.stat-box:hover{border-color:rgba(56,189,248,.5);box-shadow:0 0 30px rgba(56,189,248,.15);}
 .stat-num{
   font-family:'Orbitron',monospace;font-size:36px;font-weight:900;
   background:linear-gradient(135deg,#38bdf8,#a78bfa);
@@ -165,6 +219,7 @@ section{padding:100px 20px;max-width:1100px;margin:0 auto;position:relative;z-in
 .skill-card{
   background:rgba(30,41,59,.5);border:1px solid rgba(56,189,248,.1);
   border-radius:12px;padding:28px 20px;text-align:center;
+  -webkit-backdrop-filter:blur(10px);
   backdrop-filter:blur(10px);transition:all .3s;position:relative;overflow:hidden;
 }
 .skill-card::before{
@@ -173,7 +228,7 @@ section{padding:100px 20px;max-width:1100px;margin:0 auto;position:relative;z-in
   transform:scaleX(0);transition:transform .3s;
 }
 .skill-card:hover::before{transform:scaleX(1);}
-.skill-card:hover{border-color:rgba(56,189,248,.4);box-shadow:0 10px 40px rgba(56,189,248,.15);transform:translateY(-8px);}
+.skill-card:hover{border-color:rgba(56,189,248,.4);box-shadow:0 10px 40px rgba(56,189,248,.15);}
 .skill-icon{font-size:36px;margin-bottom:15px;}
 .skill-name{font-family:'Orbitron',monospace;font-size:13px;letter-spacing:2px;color:#38bdf8;margin-bottom:8px;}
 .skill-desc{font-size:13px;color:rgba(255,255,255,.5);}
@@ -181,15 +236,15 @@ section{padding:100px 20px;max-width:1100px;margin:0 auto;position:relative;z-in
 .skill-fill{
   height:100%;border-radius:3px;
   background:linear-gradient(90deg,#38bdf8,#a78bfa);
-  box-shadow:0 0 8px #38bdf8;animation:fillBar 2s ease .5s both;
+  box-shadow:0 0 8px #38bdf8;
 }
-@keyframes fillBar{from{width:0%;}}
 
 /* ── PROJECTS ── */
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;}
 .project-card{
   background:rgba(30,41,59,.5);border:1px solid rgba(56,189,248,.1);
-  border-radius:16px;padding:30px;backdrop-filter:blur(10px);
+  border-radius:16px;padding:30px;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
   transition:all .4s;position:relative;overflow:hidden;cursor:pointer;
 }
 .project-card::after{
@@ -198,7 +253,7 @@ section{padding:100px 20px;max-width:1100px;margin:0 auto;position:relative;z-in
   opacity:0;transition:opacity .3s;
 }
 .project-card:hover::after{opacity:1;}
-.project-card:hover{border-color:rgba(56,189,248,.4);box-shadow:0 20px 60px rgba(56,189,248,.2);transform:translateY(-12px) scale(1.02);}
+.project-card:hover{border-color:rgba(56,189,248,.4);box-shadow:0 20px 60px rgba(56,189,248,.2);}
 .project-num{font-family:'Orbitron',monospace;font-size:11px;color:#a78bfa;letter-spacing:4px;margin-bottom:15px;}
 .project-card h3{font-family:'Orbitron',monospace;font-size:18px;margin-bottom:12px;color:#fff;}
 .project-card p{color:rgba(255,255,255,.6);font-size:15px;line-height:1.7;}
@@ -212,6 +267,7 @@ section{padding:100px 20px;max-width:1100px;margin:0 auto;position:relative;z-in
 .contact-box{
   background:rgba(30,41,59,.5);border:1px solid rgba(56,189,248,.15);
   border-radius:20px;padding:60px;text-align:center;
+  -webkit-backdrop-filter:blur(20px);
   backdrop-filter:blur(20px);max-width:600px;margin:0 auto;
 }
 .contact-box p{color:rgba(255,255,255,.6);font-size:16px;margin-bottom:30px;line-height:1.7;}
@@ -219,9 +275,11 @@ section{padding:100px 20px;max-width:1100px;margin:0 auto;position:relative;z-in
 .contact-item{
   display:flex;align-items:center;gap:12px;
   background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.1);
-  border-radius:10px;padding:15px 20px;font-size:15px;color:rgba(255,255,255,.8);transition:all .3s;
+  border-radius:10px;padding:15px 20px;font-size:15px;color:rgba(255,255,255,.8);
+  transition:all .3s;text-decoration:none;
 }
 .contact-item:hover{border-color:rgba(56,189,248,.4);background:rgba(56,189,248,.1);}
+.contact-item:focus-visible{outline:2px solid #38bdf8;outline-offset:3px;}
 .contact-item span:first-child{font-size:20px;}
 
 /* ── FOOTER ── */
@@ -234,8 +292,7 @@ footer{
 footer span{color:#38bdf8;}
 
 /* ── REVEAL ── */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal{opacity:0;}
 
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:6px;}
@@ -249,24 +306,61 @@ footer span{color:#38bdf8;}
   .contact-box{padding:30px 20px;}
   nav a{margin-left:12px;font-size:12px;}
 }
+
+@media(max-width:420px){
+  header{padding:14px 18px;}
+  nav a{margin-left:8px;font-size:11px;letter-spacing:1px;}
+  .hero{padding:30px 16px;}
+  .hero-sub{font-size:15px;}
+  .btn{padding:12px 22px;font-size:11px;}
+  section{padding:70px 16px;}
+  .contact-box{padding:26px 16px;}
+}
+
+/* ── PLANET NAV BUTTONS (accessible overlay for the 3D section planets) ── */
+.planet-nav-btn{
+  position:fixed;left:0;top:0;width:48px;height:48px;border-radius:50%;
+  background:transparent;border:none;padding:0;margin:0;
+  pointer-events:auto;cursor:pointer;transform:translate(-50%,-50%);
+  -webkit-tap-highlight-color:transparent;z-index:5;
+}
+.planet-nav-btn:focus-visible{
+  outline:2px solid #38bdf8;outline-offset:6px;
+  box-shadow:0 0 24px rgba(56,189,248,.8);
+}
+
+/* Respect reduced-motion preference: keep layout/features intact, remove non-essential motion */
+@media(prefers-reduced-motion:reduce){
+  .logo,.scan::before,.intro-bar,.hero-tag,.hero h1,.hero-sub,.hero-btns,
+  .skill-fill,.planet,.reveal{animation:none !important;}
+  .reveal{opacity:1;transform:none;}
+  *{transition-duration:.01ms !important;}
+}
 </style>
 </head>
 <body>
 
-<!-- THREE.JS CANVAS -->
-<canvas id="threeCanvas"></canvas>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- THREE.JS CANVAS — purely decorative background, hidden from assistive tech -->
+<canvas id="threeCanvas" aria-hidden="true" role="presentation"></canvas>
+
+<!-- Accessible overlay for the clickable/keyboard-focusable section planets. The layer itself
+     ignores pointer events; only the individual planet buttons inside it are interactive, so
+     nothing about normal page scrolling or link clicking is affected. -->
+<div id="planetNavLayer" style="position:fixed;inset:0;pointer-events:none;z-index:5;"></div>
 
 <!-- INTRO -->
-<div id="intro">
+<div id="intro" role="status" aria-label="Loading portfolio">
   <div class="logo">PRABHANS</div>
-  <div class="scan"><div class="scan-inner"></div></div>
-  <div id="introText"></div>
-  <div class="intro-progress"><div class="intro-bar"></div></div>
+  <div class="scan" aria-hidden="true"><div class="scan-inner"></div></div>
+  <div id="introText" aria-hidden="true"></div>
+  <div class="intro-progress" aria-hidden="true"><div class="intro-bar"></div></div>
 </div>
 
 <!-- HEADER -->
 <header>
-  <nav>
+  <nav aria-label="Primary">
     <h2>PK</h2>
     <div>
       <a href="#home">Home</a>
@@ -278,28 +372,30 @@ footer span{color:#38bdf8;}
   </nav>
 </header>
 
+<main id="main">
+
 <!-- HERO -->
 <div class="hero" id="home">
   <div class="hero-content">
     <div class="hero-tag">Welcome to my universe</div>
     <h1>Hi, I'm<br><span class="name">Prabhans Kumar</span></h1>
     <p class="hero-sub">
-      <span>⚽ Football Player</span> &nbsp;·&nbsp;
-      <span>🎵 Flute Artist</span> &nbsp;·&nbsp;
-      <span>💻 Web Creator</span>
+      <span><span aria-hidden="true">⚽</span> Football Player</span> &nbsp;·&nbsp;
+      <span><span aria-hidden="true">🎵</span> Flute Artist</span> &nbsp;·&nbsp;
+      <span><span aria-hidden="true">💻</span> Web Creator</span>
     </p>
     <div class="hero-btns">
       <a href="#projects" class="btn btn-primary">View My Work</a>
       <a href="#contact" class="btn btn-outline">Contact Me</a>
     </div>
   </div>
-  <div class="planet"></div>
+  <div class="planet" aria-hidden="true"></div>
 </div>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" aria-labelledby="about-heading">
   <div class="section-label">01 — Who I Am</div>
-  <div class="section-title">About <span>Me</span></div>
+  <h2 id="about-heading" class="section-title">About <span>Me</span></h2>
   <div class="about-grid reveal">
     <div class="about-text">
       <p>I am <strong>Prabhans Kumar</strong> — a passionate footballer, soulful flute artist, and an aspiring web developer exploring the universe of technology one line of code at a time.</p>
@@ -307,32 +403,32 @@ footer span{color:#38bdf8;}
       <p>Every skill I have taught me something: discipline from football, patience from music, and creativity from coding.</p>
     </div>
     <div class="about-stats">
-      <div class="stat-box"><div class="stat-num">⚽</div><div class="stat-label">Football</div></div>
-      <div class="stat-box"><div class="stat-num">🎵</div><div class="stat-label">Flute</div></div>
-      <div class="stat-box"><div class="stat-num">💻</div><div class="stat-label">Coding</div></div>
-      <div class="stat-box"><div class="stat-num">🌌</div><div class="stat-label">Explorer</div></div>
+      <div class="stat-box"><div class="stat-num" aria-hidden="true">⚽</div><div class="stat-label">Football</div></div>
+      <div class="stat-box"><div class="stat-num" aria-hidden="true">🎵</div><div class="stat-label">Flute</div></div>
+      <div class="stat-box"><div class="stat-num" aria-hidden="true">💻</div><div class="stat-label">Coding</div></div>
+      <div class="stat-box"><div class="stat-num" aria-hidden="true">🌌</div><div class="stat-label">Explorer</div></div>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
-<section id="skills">
+<section id="skills" aria-labelledby="skills-heading">
   <div class="section-label">02 — What I Do</div>
-  <div class="section-title">My <span>Skills</span></div>
+  <h2 id="skills-heading" class="section-title">My <span>Skills</span></h2>
   <div class="skills-grid">
-    <div class="skill-card reveal"><div class="skill-icon">⚽</div><div class="skill-name">Football</div><div class="skill-desc">Team player, strong on field, disciplined and fast</div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
-    <div class="skill-card reveal"><div class="skill-icon">🎵</div><div class="skill-name">Flute Playing</div><div class="skill-desc">Classical and folk melodies with soul and rhythm</div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
-    <div class="skill-card reveal"><div class="skill-icon">🤝</div><div class="skill-name">Team Work</div><div class="skill-desc">Collaboration, communication and leadership</div><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div></div>
-    <div class="skill-card reveal"><div class="skill-icon">🧘</div><div class="skill-name">Discipline</div><div class="skill-desc">Consistent practice and focused mindset</div><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
-    <div class="skill-card reveal"><div class="skill-icon">🌐</div><div class="skill-name">Web Dev</div><div class="skill-desc">HTML, CSS and JavaScript — building worlds online</div><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div></div>
-    <div class="skill-card reveal"><div class="skill-icon">🎯</div><div class="skill-name">Goal Setting</div><div class="skill-desc">Clear targets, relentless pursuit, never give up</div><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+    <div class="skill-card reveal"><div class="skill-icon" aria-hidden="true">⚽</div><div class="skill-name">Football</div><div class="skill-desc">Team player, strong on field, disciplined and fast</div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+    <div class="skill-card reveal"><div class="skill-icon" aria-hidden="true">🎵</div><div class="skill-name">Flute Playing</div><div class="skill-desc">Classical and folk melodies with soul and rhythm</div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+    <div class="skill-card reveal"><div class="skill-icon" aria-hidden="true">🤝</div><div class="skill-name">Team Work</div><div class="skill-desc">Collaboration, communication and leadership</div><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div></div>
+    <div class="skill-card reveal"><div class="skill-icon" aria-hidden="true">🧘</div><div class="skill-name">Discipline</div><div class="skill-desc">Consistent practice and focused mindset</div><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+    <div class="skill-card reveal"><div class="skill-icon" aria-hidden="true">🌐</div><div class="skill-name">Web Dev</div><div class="skill-desc">HTML, CSS and JavaScript — building worlds online</div><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div></div>
+    <div class="skill-card reveal"><div class="skill-icon" aria-hidden="true">🎯</div><div class="skill-name">Goal Setting</div><div class="skill-desc">Clear targets, relentless pursuit, never give up</div><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section id="projects">
+<section id="projects" aria-labelledby="projects-heading">
   <div class="section-label">03 — What I've Built</div>
-  <div class="section-title">My <span>Projects</span></div>
+  <h2 id="projects-heading" class="section-title">My <span>Projects</span></h2>
   <div class="projects-grid">
     <div class="project-card reveal"><div class="project-num">PROJECT 001</div><h3>Personal Portfolio</h3><p>My first HTML & CSS website with a stunning 3D universe background — hosted live on Vercel for the world to see.</p><span class="project-tag">HTML · CSS · JS</span></div>
     <div class="project-card reveal"><div class="project-num">PROJECT 002</div><h3>Football Gallery</h3><p>A visual collection of my football practice moments, match highlights, and training journey over the years.</p><span class="project-tag">Gallery · Sports</span></div>
@@ -341,21 +437,28 @@ footer span{color:#38bdf8;}
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" aria-labelledby="contact-heading">
   <div class="section-label">04 — Get In Touch</div>
-  <div class="section-title">Contact <span>Me</span></div>
+  <h2 id="contact-heading" class="section-title">Contact <span>Me</span></h2>
   <div class="contact-box reveal">
     <p>I'm open to collaborations, projects, and conversations. Whether you want to talk football, music or code — reach out!</p>
     <div class="contact-info">
-      <div class="contact-item"><span>📧</span><span>mauryaprabhans@gmail.com</span></div>
-      <div class="contact-item"><span>📱</span><span>+91 6299646432</span></div>
+      <a class="contact-item" href="mailto:mauryaprabhans@gmail.com"><span aria-hidden="true">📧</span><span>mauryaprabhans@gmail.com</span></a>
+      <a class="contact-item" href="tel:+916299646432"><span aria-hidden="true">📱</span><span>+91 6299646432</span></a>
     </div>
     <a href="mailto:mauryaprabhans@gmail.com" class="btn btn-primary">Send Message</a>
   </div>
 </section>
 
+</main>
+
 <footer>© 2026 <span>Prabhans Kumar</span> — Built from the universe, for the world.</footer>
 
+<!-- GSAP (+ScrollTrigger) for all UI motion — hero, reveals, cards, buttons, nav, loader -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<!-- Three.js loaded just before use so it no longer blocks initial HTML parsing/paint -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* ================================================================
    INTRO TYPEWRITER
@@ -368,9 +471,26 @@ function typeIntro(){
   else{
     setTimeout(()=>{
       const intro = document.getElementById("intro");
-      intro.style.transition = "opacity 1.5s";
-      intro.style.opacity = "0";
-      setTimeout(()=> intro.style.display = "none", 1500);
+      const scanEl = intro.querySelector(".scan");
+      if(typeof gsap !== "undefined"){
+        // Premium exit: the scanner ring collapses and the whole loader zooms/fades away,
+        // then the UI script's hero timeline is cued via a custom event.
+        const tl = gsap.timeline({ onComplete:()=>{
+          intro.style.display = "none";
+          window.dispatchEvent(new CustomEvent("introComplete"));
+        }});
+        tl.to(scanEl, { scale:0.6, opacity:0, duration:0.5, ease:"power2.in" })
+          .to(introEl, { opacity:0, duration:0.3 }, "<")
+          .to(intro, { opacity:0, scale:1.08, duration:0.6, ease:"power2.inOut" }, "-=0.15");
+      } else {
+        // Fallback if GSAP fails to load — original simple fade, plus still cue the hero.
+        intro.style.transition = "opacity 1.5s";
+        intro.style.opacity = "0";
+        setTimeout(()=>{
+          intro.style.display = "none";
+          window.dispatchEvent(new CustomEvent("introComplete"));
+        }, 1500);
+      }
     }, 2000);
   }
 }
@@ -380,7 +500,16 @@ typeIntro();
    THREE.JS UNIVERSE
 ================================================================ */
 const canvas = document.getElementById('threeCanvas');
-const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+
+/* ── Perf/accessibility flags (computed first so the renderer itself can use them) ── */
+// Fewer particles on small screens keeps frame time low on phones; same scene, same features, just scaled counts.
+const IS_SMALL_SCREEN = window.innerWidth < 600;
+const PARTICLE_SCALE = IS_SMALL_SCREEN ? 0.5 : 1;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Antialiasing is one of the more expensive GPU costs in a scene this dense with transparent,
+// additively-blended objects — skip it on small/low-end screens where it's least noticeable anyway.
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: !IS_SMALL_SCREEN, alpha:true, powerPreference:'high-performance' });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(0x000005, 1);
@@ -389,22 +518,53 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 2000);
 camera.position.z = 5;
 
-window.addEventListener('resize',()=>{
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  camera.aspect = window.innerWidth/window.innerHeight;
-  camera.updateProjectionMatrix();
-});
+
+/* ── Cinematic camera state ──────────────────────────────────────
+   Everything the camera needs lives here so the render loop below just
+   reads/eases these values instead of touching the DOM or allocating. */
+const CAMERA_BASE_FOV  = 75;   // resting field of view
+const CAMERA_DOLLY_FOV = 68;   // subtle narrowing at max scroll — a dolly-zoom depth cue
+const cameraTargetPos  = new THREE.Vector3(0, 0, 5);   // reused every frame, never re-allocated
+const lookAtTarget     = new THREE.Vector3(0, 0, -10);
+const smoothedLookAt   = new THREE.Vector3(0, 0, -10);
+
+let mouseX = 0, mouseY = 0;              // raw pointer position, -1..1
+let smoothMouseX = 0, smoothMouseY = 0;  // eased pointer — first stage of the two-stage inertia
+let cameraRoll = 0;                      // eased subtle dutch-angle roll, tracked independently of camera.rotation.z (lookAt overwrites that each frame)
+let maxScroll = 1;                       // cached scroll bounds — recomputed only on resize, not every frame
+let rawScrollProgress = 0;               // 0..1, updated only on scroll events
+let smoothScrollProgress = 0;            // eased scroll value that actually drives the camera
+let lastFrameT = 0;                      // previous frame's clock time, for frame-rate-independent easing
+
+function recalcScrollBounds(){
+  maxScroll = Math.max(document.body.scrollHeight - window.innerHeight, 1);
+}
+recalcScrollBounds();
+
+// Debounce resize so we don't thrash the renderer on every pixel during a drag-resize.
+let resizeTimeout;
+window.addEventListener('resize', ()=>{
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(()=>{
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    recalcScrollBounds();
+  }, 120);
+}, { passive:true });
 
 /* ── Mouse parallax ── */
-let mouseX = 0, mouseY = 0;
 document.addEventListener('mousemove', e=>{
   mouseX = (e.clientX / window.innerWidth  - 0.5) * 2;
   mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-});
+}, { passive:true });
 
 /* ── Scroll ── */
-let scrollY = 0;
-window.addEventListener('scroll', ()=>{ scrollY = window.scrollY; });
+// Progress is computed here, once per scroll event, instead of every animation frame —
+// avoids reading layout (scrollHeight) 60 times a second.
+window.addEventListener('scroll', ()=>{
+  rawScrollProgress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+}, { passive:true });
 
 /* ================================================================
    1. STAR FIELD — 3 layers with points
@@ -421,9 +581,9 @@ function makeStarField(count, spread, size, color){
   const mat = new THREE.PointsMaterial({ color, size, sizeAttenuation:true, transparent:true, opacity:0.9 });
   return new THREE.Points(geo, mat);
 }
-const stars1 = makeStarField(3000, 400, 0.18, 0xffffff);
-const stars2 = makeStarField(1500, 300, 0.12, 0x38bdf8);
-const stars3 = makeStarField(800,  200, 0.08, 0xa78bfa);
+const stars1 = makeStarField(Math.round(3000*PARTICLE_SCALE), 400, 0.18, 0xffffff);
+const stars2 = makeStarField(Math.round(1500*PARTICLE_SCALE), 300, 0.12, 0x38bdf8);
+const stars3 = makeStarField(Math.round(800*PARTICLE_SCALE),  200, 0.08, 0xa78bfa);
 scene.add(stars1, stars2, stars3);
 
 /* ================================================================
@@ -440,24 +600,79 @@ function makeNebulaTexture(color1, color2){
   cx.fillStyle = g; cx.fillRect(0,0,size,size);
   return new THREE.CanvasTexture(c);
 }
+// Wispier variant used only by the 4 large background nebula planes — layers soft
+// overlapping blobs on top of the base glow so the cloud reads as textured, not a flat disc.
+function makeCloudTexture(color1, color2){
+  const size = 512;
+  const c = document.createElement('canvas'); c.width = c.height = size;
+  const cx = c.getContext('2d');
+  const g = cx.createRadialGradient(size/2,size/2,0,size/2,size/2,size/2);
+  g.addColorStop(0, color1);
+  g.addColorStop(0.45, color2);
+  g.addColorStop(1, 'rgba(0,0,0,0)');
+  cx.fillStyle = g; cx.fillRect(0,0,size,size);
+  for(let i=0;i<9;i++){
+    const bx = size*0.5 + (Math.random()-0.5)*size*0.7;
+    const by = size*0.5 + (Math.random()-0.5)*size*0.7;
+    const br = size*(0.12+Math.random()*0.22);
+    const bg = cx.createRadialGradient(bx,by,0,bx,by,br);
+    bg.addColorStop(0, color1);
+    bg.addColorStop(1, 'rgba(0,0,0,0)');
+    cx.fillStyle = bg;
+    cx.globalAlpha = 0.35+Math.random()*0.25;
+    cx.beginPath(); cx.arc(bx,by,br,0,Math.PI*2); cx.fill();
+  }
+  cx.globalAlpha = 1;
+  return new THREE.CanvasTexture(c);
+}
 const nebulaData = [
   {x:-40,y:20,z:-80, c1:'rgba(56,189,248,0.18)', c2:'rgba(56,189,248,0)', s:80},
   {x:60,y:-30,z:-120,c1:'rgba(167,139,250,0.15)',c2:'rgba(167,139,250,0)',s:100},
   {x:-20,y:-50,z:-60,c1:'rgba(52,211,153,0.12)', c2:'rgba(52,211,153,0)', s:70},
   {x:80,y:40,z:-90,  c1:'rgba(251,191,36,0.10)', c2:'rgba(251,191,36,0)', s:90},
 ];
+const nebulaMeshes = [];
 nebulaData.forEach(d=>{
-  const tex = makeNebulaTexture(d.c1, d.c2);
-  const mat = new THREE.MeshBasicMaterial({map:tex,transparent:true,depthWrite:false,side:THREE.DoubleSide});
+  const tex = makeCloudTexture(d.c1, d.c2);
+  const mat = new THREE.MeshBasicMaterial({map:tex,transparent:true,depthWrite:false,side:THREE.DoubleSide,blending:THREE.AdditiveBlending});
   const mesh = new THREE.Mesh(new THREE.PlaneGeometry(d.s,d.s), mat);
   mesh.position.set(d.x,d.y,d.z);
   mesh.rotation.z = Math.random()*Math.PI;
   scene.add(mesh);
+  nebulaMeshes.push({ mesh, spin:(Math.random()-0.5)*0.0006, baseOpacity:0.85+Math.random()*0.15, phase:Math.random()*Math.PI*2 });
 });
 
 /* ================================================================
    3. DISTANT PLANETS
 ================================================================ */
+// Procedural surface texture — banding + soft continent-like blobs so planets read
+// as textured spheres under lighting instead of flat-shaded balls.
+function makePlanetTexture(hex){
+  const size = 256;
+  const c = document.createElement('canvas'); c.width=size; c.height=size;
+  const cx = c.getContext('2d');
+  const col = new THREE.Color(hex);
+  const r=Math.round(col.r*255), g=Math.round(col.g*255), b=Math.round(col.b*255);
+  const shade=(f)=>`rgba(${Math.min(255,Math.round(r*f))},${Math.min(255,Math.round(g*f))},${Math.min(255,Math.round(b*f))},1)`;
+  const grad = cx.createLinearGradient(0,0,0,size);
+  grad.addColorStop(0, shade(0.55));
+  grad.addColorStop(0.5, shade(1.1));
+  grad.addColorStop(1, shade(0.55));
+  cx.fillStyle=grad; cx.fillRect(0,0,size,size);
+  for(let i=0;i<16;i++){
+    const y = Math.random()*size;
+    cx.fillStyle = `rgba(255,255,255,${0.02+Math.random()*0.06})`;
+    cx.fillRect(0,y,size,3+Math.random()*10);
+  }
+  for(let i=0;i<12;i++){
+    const bx=Math.random()*size, by=Math.random()*size, br=6+Math.random()*22;
+    cx.fillStyle = `rgba(255,255,255,${0.05+Math.random()*0.09})`;
+    cx.beginPath(); cx.ellipse(bx,by,br,br*0.55,Math.random()*Math.PI,0,Math.PI*2); cx.fill();
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = THREE.RepeatWrapping;
+  return tex;
+}
 const planetColors = [0xa78bfa,0x38bdf8,0x34d399,0xf97316,0xef4444,0xfbbf24];
 const planets = [];
 for(let i=0;i<6;i++){
@@ -465,34 +680,235 @@ for(let i=0;i<6;i++){
   const geo = new THREE.SphereGeometry(r,32,32);
   const col = planetColors[i%planetColors.length];
   const mat = new THREE.MeshPhongMaterial({
-    color: col,
+    map: makePlanetTexture(col),
+    color: 0xffffff,
     emissive: col,
-    emissiveIntensity: 0.15,
-    shininess: 60,
+    emissiveIntensity: 0.12,
+    shininess: 55,
+    specular: new THREE.Color(0x9db8ff),
   });
   const mesh = new THREE.Mesh(geo, mat);
-  mesh.position.set(
+  const origin = new THREE.Vector3(
     (Math.random()-0.5)*120,
     (Math.random()-0.5)*60,
     -30 - Math.random()*80
   );
+  mesh.position.copy(origin);
   // Rings for some
   if(Math.random()>0.5){
     const ringGeo = new THREE.RingGeometry(r*1.4, r*2.4, 64);
-    const ringMat = new THREE.MeshBasicMaterial({color:col,side:THREE.DoubleSide,transparent:true,opacity:0.3});
+    const ringMat = new THREE.MeshBasicMaterial({color:col,side:THREE.DoubleSide,transparent:true,opacity:0.3,blending:THREE.AdditiveBlending});
     const ring = new THREE.Mesh(ringGeo, ringMat);
     ring.rotation.x = Math.PI/2.5;
     mesh.add(ring);
   }
-  // Glow sprite
-  const glowTex = makeNebulaTexture(`rgba(${(col>>16)&255},${(col>>8)&255},${col&255},0.25)`,'rgba(0,0,0,0)');
-  const glowMat = new THREE.MeshBasicMaterial({map:glowTex,transparent:true,depthWrite:false,side:THREE.DoubleSide});
+  // Glow sprite — additive for a premium bloom-like halo instead of a flat translucent disc
+  const glowTex = makeNebulaTexture(`rgba(${(col>>16)&255},${(col>>8)&255},${col&255},0.3)`,'rgba(0,0,0,0)');
+  const glowMat = new THREE.MeshBasicMaterial({map:glowTex,transparent:true,depthWrite:false,side:THREE.DoubleSide,blending:THREE.AdditiveBlending});
   const glowMesh = new THREE.Mesh(new THREE.PlaneGeometry(r*6,r*6), glowMat);
   mesh.add(glowMesh);
 
   scene.add(mesh);
-  planets.push({ mesh, rotSpeed:(Math.random()-0.5)*0.002, floatPhase:Math.random()*Math.PI*2, floatSpeed:0.3+Math.random()*0.3, baseY:mesh.position.y });
+
+  // Faint orbit path — a thin ring laid flat around the planet's resting point that it
+  // slowly revolves along, on top of its own axial spin and vertical bob.
+  const orbitRadius = r*1.8 + 2 + Math.random()*3;
+  const orbitPathGeo = new THREE.RingGeometry(orbitRadius-0.03, orbitRadius+0.03, 80);
+  const orbitPathMat = new THREE.MeshBasicMaterial({color:col,side:THREE.DoubleSide,transparent:true,opacity:0.1,blending:THREE.AdditiveBlending,depthWrite:false});
+  const orbitPath = new THREE.Mesh(orbitPathGeo, orbitPathMat);
+  orbitPath.rotation.x = Math.PI/2;
+  orbitPath.position.copy(origin);
+  scene.add(orbitPath);
+
+  planets.push({
+    mesh, glowMesh, origin, orbitRadius,
+    orbitAngle: Math.random()*Math.PI*2,
+    orbitSpeed: (0.02+Math.random()*0.03) * (Math.random()<0.5?-1:1),
+    rotSpeed:(Math.random()-0.5)*0.002,
+    floatPhase:Math.random()*Math.PI*2, floatSpeed:0.3+Math.random()*0.3,
+    glowPhase: Math.random()*Math.PI*2
+  });
 }
+
+/* ================================================================
+   3.5 SECTION NAV PLANETS — Earth (About), Saturn (Skills),
+       Mars (Projects), Moon (Contact). Click/tap/keyboard-activate
+       to fly the camera toward the planet and scroll to its section.
+================================================================ */
+function makeEarthTexture(){
+  const size=256;
+  const c=document.createElement('canvas'); c.width=size;c.height=size;
+  const cx=c.getContext('2d');
+  const grad=cx.createLinearGradient(0,0,0,size);
+  grad.addColorStop(0,'#0b3d68'); grad.addColorStop(0.5,'#1c6fa8'); grad.addColorStop(1,'#0b3d68');
+  cx.fillStyle=grad; cx.fillRect(0,0,size,size);
+  for(let i=0;i<14;i++){
+    const bx=Math.random()*size, by=Math.random()*size, br=10+Math.random()*26;
+    cx.fillStyle=`rgba(${60+Math.random()*40|0},${120+Math.random()*60|0},${50+Math.random()*30|0},${0.55+Math.random()*0.25})`;
+    cx.beginPath(); cx.ellipse(bx,by,br,br*0.6,Math.random()*Math.PI,0,Math.PI*2); cx.fill();
+  }
+  for(let i=0;i<10;i++){
+    const bx=Math.random()*size, by=Math.random()*size, br=8+Math.random()*20;
+    cx.fillStyle=`rgba(255,255,255,${0.08+Math.random()*0.12})`;
+    cx.beginPath(); cx.ellipse(bx,by,br,br*0.4,Math.random()*Math.PI,0,Math.PI*2); cx.fill();
+  }
+  const tex=new THREE.CanvasTexture(c); tex.wrapS=THREE.RepeatWrapping; return tex;
+}
+function makeSaturnTexture(){
+  const size=256;
+  const c=document.createElement('canvas'); c.width=size;c.height=size;
+  const cx=c.getContext('2d');
+  const bands=['#e7cf9e','#d9b876','#eddcb0','#c9a566','#e2c98d','#dbc292'];
+  const bandH=size/bands.length;
+  bands.forEach((col,i)=>{ cx.fillStyle=col; cx.fillRect(0,i*bandH,size,bandH+1); });
+  for(let i=0;i<40;i++){
+    cx.fillStyle=`rgba(255,255,255,${0.02+Math.random()*0.05})`;
+    cx.fillRect(0, Math.random()*size, size, 1+Math.random()*2);
+  }
+  const tex=new THREE.CanvasTexture(c); tex.wrapS=THREE.RepeatWrapping; return tex;
+}
+function makeMarsTexture(){
+  const size=256;
+  const c=document.createElement('canvas'); c.width=size;c.height=size;
+  const cx=c.getContext('2d');
+  const grad=cx.createLinearGradient(0,0,0,size);
+  grad.addColorStop(0,'#8a2f1c'); grad.addColorStop(0.5,'#c1512f'); grad.addColorStop(1,'#7a2915');
+  cx.fillStyle=grad; cx.fillRect(0,0,size,size);
+  for(let i=0;i<16;i++){
+    const bx=Math.random()*size, by=Math.random()*size, br=6+Math.random()*20;
+    cx.fillStyle=`rgba(60,20,10,${0.15+Math.random()*0.2})`;
+    cx.beginPath(); cx.ellipse(bx,by,br,br*0.5,Math.random()*Math.PI,0,Math.PI*2); cx.fill();
+  }
+  const tex=new THREE.CanvasTexture(c); tex.wrapS=THREE.RepeatWrapping; return tex;
+}
+function makeMoonTexture(){
+  const size=256;
+  const c=document.createElement('canvas'); c.width=size;c.height=size;
+  const cx=c.getContext('2d');
+  const grad=cx.createLinearGradient(0,0,0,size);
+  grad.addColorStop(0,'#8c8c94'); grad.addColorStop(0.5,'#c4c4cc'); grad.addColorStop(1,'#8c8c94');
+  cx.fillStyle=grad; cx.fillRect(0,0,size,size);
+  for(let i=0;i<26;i++){
+    const bx=Math.random()*size, by=Math.random()*size, br=3+Math.random()*10;
+    cx.fillStyle=`rgba(80,80,86,${0.25+Math.random()*0.2})`;
+    cx.beginPath(); cx.arc(bx,by,br,0,Math.PI*2); cx.fill();
+    cx.fillStyle=`rgba(220,220,226,${0.15+Math.random()*0.15})`;
+    cx.beginPath(); cx.arc(bx-br*0.3,by-br*0.3,br*0.4,0,Math.PI*2); cx.fill();
+  }
+  const tex=new THREE.CanvasTexture(c); tex.wrapS=THREE.RepeatWrapping; return tex;
+}
+
+// Glowing billboard text label (always faces the camera via THREE.Sprite)
+function makeLabelSprite(text, colorHex){
+  const scale = 4;
+  const c = document.createElement('canvas'); c.width = 256*scale; c.height = 64*scale;
+  const cx = c.getContext('2d'); cx.scale(scale,scale);
+  cx.font = "700 26px 'Orbitron', monospace";
+  cx.textAlign = 'center'; cx.textBaseline = 'middle';
+  const colorStr = '#'+colorHex.toString(16).padStart(6,'0');
+  cx.shadowColor = colorStr; cx.shadowBlur = 18;
+  cx.fillStyle = '#ffffff';
+  cx.fillText(text.toUpperCase(), 128, 32);
+  cx.shadowBlur = 6; cx.globalAlpha = 0.65; cx.fillStyle = colorStr;
+  cx.fillText(text.toUpperCase(), 128, 32);
+  const tex = new THREE.CanvasTexture(c);
+  tex.minFilter = THREE.LinearFilter;
+  const mat = new THREE.SpriteMaterial({map:tex, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending});
+  const sprite = new THREE.Sprite(mat);
+  sprite.scale.set(4.2, 1.05, 1);
+  return sprite;
+}
+
+const navPlanetLayer = document.getElementById('planetNavLayer');
+const navPlanets = [];
+
+function setPlanetHover(np, hovered){ np.hovered = hovered; }
+
+// Camera "flight" state — briefly nudges the existing scroll-driven look-at toward the
+// clicked planet, then releases control back to the normal camera system automatically.
+const navFlight = { active:false, start:0, duration:1.1, target:new THREE.Vector3() };
+
+// Fires when a nav planet is activated by click, tap, or keyboard (Enter/Space on the button)
+function goToSection(np){
+  const targetEl = document.getElementById(np.sectionId);
+  if(!targetEl) return;
+  navFlight.active = true;
+  navFlight.start = clock.getElapsedTime();
+  navFlight.duration = 1.1;
+  navFlight.target.copy(np.mesh.getWorldPosition(new THREE.Vector3()));
+  targetEl.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+}
+
+function createNavPlanet(cfg){
+  const geo = new THREE.SphereGeometry(cfg.radius, 40, 40);
+  const mat = new THREE.MeshPhongMaterial({
+    map: cfg.texture(),
+    color: 0xffffff,
+    emissive: cfg.color,
+    emissiveIntensity: 0.2,
+    shininess: 45,
+    specular: new THREE.Color(0xffffff)
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.copy(cfg.origin);
+  scene.add(mesh);
+
+  if(cfg.hasRing){
+    const ringGeo = new THREE.RingGeometry(cfg.radius*1.5, cfg.radius*2.6, 80);
+    const ringMat = new THREE.MeshBasicMaterial({color:cfg.ringColor||cfg.color, side:THREE.DoubleSide, transparent:true, opacity:0.55, blending:THREE.AdditiveBlending});
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI/2.3;
+    mesh.add(ring);
+  }
+
+  const glowTex = makeNebulaTexture(`rgba(${(cfg.color>>16)&255},${(cfg.color>>8)&255},${cfg.color&255},0.4)`, 'rgba(0,0,0,0)');
+  const glowMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(cfg.radius*7, cfg.radius*7),
+    new THREE.MeshBasicMaterial({map:glowTex, transparent:true, depthWrite:false, side:THREE.DoubleSide, blending:THREE.AdditiveBlending})
+  );
+  mesh.add(glowMesh);
+
+  const label = makeLabelSprite(cfg.label, cfg.color);
+  label.position.set(0, cfg.radius + 1.6, 0);
+  mesh.add(label);
+
+  // Invisible, focusable button kept glued to the planet's on-screen position every frame —
+  // this is what makes the planet clickable, tappable, and keyboard-activatable.
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'planet-nav-btn';
+  button.setAttribute('aria-label', `Go to ${cfg.label} section`);
+  button.style.display = 'none';
+  navPlanetLayer.appendChild(button);
+
+  const np = {
+    mesh, glowMesh, label, button, sectionId: cfg.sectionId,
+    origin: cfg.origin.clone(),
+    orbitRadius: 2.2+Math.random()*1.4,
+    orbitAngle: Math.random()*Math.PI*2,
+    orbitSpeed: 0.15+Math.random()*0.08,
+    floatPhase: Math.random()*Math.PI*2,
+    floatSpeed: 0.35+Math.random()*0.2,
+    rotSpeed: 0.003+Math.random()*0.004,
+    glowPhase: Math.random()*Math.PI*2,
+    hovered: false,
+    currentScale: 1
+  };
+
+  button.addEventListener('pointerenter', ()=> setPlanetHover(np, true));
+  button.addEventListener('pointerleave', ()=> setPlanetHover(np, false));
+  button.addEventListener('focus', ()=> setPlanetHover(np, true));
+  button.addEventListener('blur', ()=> setPlanetHover(np, false));
+  button.addEventListener('click', (e)=>{ e.preventDefault(); goToSection(np); });
+
+  navPlanets.push(np);
+  return np;
+}
+
+createNavPlanet({ sectionId:'about',    label:'About',    radius:2.1,  color:0x38bdf8, origin:new THREE.Vector3(-13, 3,-14), texture:makeEarthTexture });
+createNavPlanet({ sectionId:'skills',   label:'Skills',   radius:2.5,  color:0xd6b25e, origin:new THREE.Vector3( 15,-4,-19), texture:makeSaturnTexture, hasRing:true, ringColor:0xe8d9a0 });
+createNavPlanet({ sectionId:'projects', label:'Projects', radius:1.6,  color:0xe2593a, origin:new THREE.Vector3(-14,-7,-24), texture:makeMarsTexture });
+createNavPlanet({ sectionId:'contact',  label:'Contact',  radius:1.05, color:0xc9ccd1, origin:new THREE.Vector3( 13, 6,-27), texture:makeMoonTexture });
 
 /* ================================================================
    4. BLACK HOLE
@@ -504,35 +920,42 @@ function createBlackHole(x,y,z){
   const bh = new THREE.Mesh(new THREE.SphereGeometry(2,32,32), bhMat);
   group.add(bh);
 
-  // Photon ring
+  // Photon ring — additive so it reads as searing light rather than a flat orange band
   const ringGeo = new THREE.RingGeometry(2.1,2.5,64);
-  const ringMat = new THREE.MeshBasicMaterial({color:0xfbbf24,side:THREE.DoubleSide,transparent:true,opacity:0.9});
+  const ringMat = new THREE.MeshBasicMaterial({color:0xfbbf24,side:THREE.DoubleSide,transparent:true,opacity:0.9,blending:THREE.AdditiveBlending});
   const ring = new THREE.Mesh(ringGeo, ringMat);
   ring.rotation.x = Math.PI/2;
   group.add(ring);
 
-  // Accretion disk (multiple rings)
+  // Accretion disk (multiple rings), additive-blended for a hot glowing look
   const diskColors = [0xfbbf24,0xf97316,0xef4444,0xa78bfa];
+  const disks = [];
   for(let i=0;i<4;i++){
     const dGeo = new THREE.RingGeometry(2.6+i*0.6, 3.0+i*0.6, 64);
     const dMat = new THREE.MeshBasicMaterial({
       color:diskColors[i],side:THREE.DoubleSide,
-      transparent:true,opacity:0.35-i*0.06
+      transparent:true,opacity:0.35-i*0.06,blending:THREE.AdditiveBlending
     });
     const d = new THREE.Mesh(dGeo,dMat);
     d.rotation.x = 1.2 + i*0.05;
     group.add(d);
+    disks.push({ mesh:d, baseOpacity:0.35-i*0.06 });
   }
 
-  // Glow
-  const glowTex = makeNebulaTexture('rgba(251,191,36,0.3)','rgba(0,0,0,0)');
+  // Glow — additive, brighter core
+  const glowTex = makeNebulaTexture('rgba(251,191,36,0.35)','rgba(0,0,0,0)');
   const glowMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(30,30),
-    new THREE.MeshBasicMaterial({map:glowTex,transparent:true,depthWrite:false,side:THREE.DoubleSide})
+    new THREE.MeshBasicMaterial({map:glowTex,transparent:true,depthWrite:false,side:THREE.DoubleSide,blending:THREE.AdditiveBlending})
   );
   group.add(glowMesh);
 
   group.position.set(x,y,z);
+  // Stash refs so the animation loop can pulse the disk/glow without re-traversing the group
+  group.userData.ring = ring;
+  group.userData.disks = disks;
+  group.userData.glow = glowMesh;
+  group.userData.pulsePhase = Math.random()*Math.PI*2;
   scene.add(group);
   return group;
 }
@@ -540,30 +963,66 @@ const bh1 = createBlackHole(-35, 10, -50);
 const bh2 = createBlackHole( 55,-15,-70);
 
 /* ================================================================
+   TRAIL HELPER — shared by Meteor tail, Satellite trail & Comet tail
+   (previously each class duplicated this history-array + buffer-sync logic)
+================================================================ */
+class Trail{
+  constructor(pointCount, material, { vertexFade=false } = {}){
+    this.count = pointCount;
+    this.history = [];
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pointCount*3), 3));
+    if(vertexFade){
+      const colors = new Float32Array(pointCount*3);
+      for(let i=0;i<pointCount;i++){
+        const t = 1 - i/pointCount;
+        colors[i*3]=t; colors[i*3+1]=t; colors[i*3+2]=t;
+      }
+      geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    }
+    this.line = new THREE.Line(geo, material);
+    scene.add(this.line);
+  }
+  reset(){ this.history = []; }
+  // Record a new head point (world- or local-space depending on caller), then rewrite the buffer.
+  // offsetFn(point, index) lets callers apply per-vertex offsets (e.g. meteor's velocity-based taper).
+  update(point, offsetFn){
+    this.history.unshift(point);
+    if(this.history.length > this.count) this.history.pop();
+    const arr = this.line.geometry.attributes.position.array;
+    for(let i=0;i<this.count;i++){
+      const h = this.history[i] || point;
+      const p = offsetFn ? offsetFn(h,i) : h;
+      arr[i*3]=p.x; arr[i*3+1]=p.y; arr[i*3+2]=p.z;
+    }
+    this.line.geometry.attributes.position.needsUpdate = true;
+  }
+}
+
+/* ================================================================
    5. METEORS / SHOOTING STARS — custom line sprites
 ================================================================ */
 class MeteorObj{
   constructor(){
     this.group = new THREE.Group();
+    // Slight color variety — mostly white-hot with occasional blue/violet streaks
+    const palette = [0xffffff,0xffffff,0x9fd8ff,0xd8b4fe];
+    this.color = palette[Math.floor(Math.random()*palette.length)];
     // Head
-    const hMat = new THREE.MeshBasicMaterial({color:0xffffff});
+    const hMat = new THREE.MeshBasicMaterial({color:this.color});
     this.head = new THREE.Mesh(new THREE.SphereGeometry(0.08,8,8), hMat);
     this.group.add(this.head);
-    // Tail
-    const tailCount = 20;
-    const tailGeo = new THREE.BufferGeometry();
-    const tailPos = new Float32Array(tailCount*3);
-    tailGeo.setAttribute('position', new THREE.BufferAttribute(tailPos,3));
-    const tailColors = new Float32Array(tailCount*3);
-    for(let i=0;i<tailCount;i++){
-      const t = 1 - i/tailCount;
-      tailColors[i*3]=t; tailColors[i*3+1]=t; tailColors[i*3+2]=t;
-    }
-    tailGeo.setAttribute('color', new THREE.BufferAttribute(tailColors,3));
-    const tailMat = new THREE.LineBasicMaterial({vertexColors:true,transparent:true,opacity:0.7});
-    this.tail = new THREE.Line(tailGeo, tailMat);
-    this.group.add(this.tail);
-    this.history = [];
+    // Head glow — additive halo so the streak reads as burning rather than a flat dot
+    const glowTex = makeNebulaTexture('rgba(255,255,255,0.9)','rgba(255,255,255,0)');
+    this.glow = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.9,0.9),
+      new THREE.MeshBasicMaterial({map:glowTex,color:this.color,transparent:true,depthWrite:false,side:THREE.DoubleSide,blending:THREE.AdditiveBlending})
+    );
+    this.group.add(this.glow);
+    // Tail (built in group-local space so it fades behind the head as it moves), additive for a brighter burn trail
+    const tailMat = new THREE.LineBasicMaterial({vertexColors:true,transparent:true,opacity:0.85,blending:THREE.AdditiveBlending});
+    this.trail = new Trail(20, tailMat, { vertexFade:true });
+    this.group.add(this.trail.line);
     scene.add(this.group);
     this.reset();
   }
@@ -574,26 +1033,17 @@ class MeteorObj{
     this.vx = 0.3 + Math.random()*0.5;
     this.vy = -0.1 - Math.random()*0.2;
     this.vz = 0.05;
-    this.history = [];
+    this.trail.reset();
     this.group.position.set(this.x,this.y,this.z);
   }
   update(){
     this.x += this.vx; this.y += this.vy; this.z += this.vz;
     this.group.position.set(this.x,this.y,this.z);
-    this.history.unshift({x:0,y:0,z:0});
-    if(this.history.length>20) this.history.pop();
-    const pos = this.tail.geometry.attributes.position.array;
-    for(let i=0;i<20;i++){
-      const h = this.history[i]||{x:0,y:0,z:0};
-      pos[i*3]=h.x - this.vx*i;
-      pos[i*3+1]=h.y - this.vy*i;
-      pos[i*3+2]=h.z;
-    }
-    this.tail.geometry.attributes.position.needsUpdate=true;
+    this.trail.update({x:0,y:0,z:0}, (h,i)=>({ x:h.x-this.vx*i, y:h.y-this.vy*i, z:h.z }));
     if(this.y < -40 || this.x > 120) this.reset();
   }
 }
-const meteors = Array.from({length:8},()=>{ const m=new MeteorObj(); m.x=(Math.random()-0.5)*200; m.y=(Math.random()-0.5)*50; return m; });
+const meteors = Array.from({length:Math.max(3, Math.round(8*PARTICLE_SCALE))},()=>{ const m=new MeteorObj(); m.x=(Math.random()-0.5)*200; m.y=(Math.random()-0.5)*50; return m; });
 
 /* ================================================================
    6. SATELLITES
@@ -623,12 +1073,7 @@ class SatelliteObj{
     blink.position.set(0.3,0.15,0);
     this.group.add(blink);
     // Trail
-    const trailGeo = new THREE.BufferGeometry();
-    const trailPos = new Float32Array(30*3);
-    trailGeo.setAttribute('position',new THREE.BufferAttribute(trailPos,3));
-    this.trail = new THREE.Line(trailGeo, new THREE.LineBasicMaterial({color:0x38bdf8,transparent:true,opacity:0.3}));
-    scene.add(this.trail);
-    this.trailHistory=[];
+    this.trail = new Trail(30, new THREE.LineBasicMaterial({color:0x38bdf8,transparent:true,opacity:0.3}));
     scene.add(this.group);
     this.reset();
     this.blinkT=Math.random()*Math.PI*2;
@@ -636,7 +1081,7 @@ class SatelliteObj{
   reset(){
     this.x=-80; this.y=20*(Math.random()-.5); this.z=-5-Math.random()*15;
     this.vx=0.05+Math.random()*0.08; this.vy=(Math.random()-.5)*0.01;
-    this.trailHistory=[];
+    this.trail.reset();
   }
   update(t){
     this.blinkT+=0.06;
@@ -644,14 +1089,7 @@ class SatelliteObj{
     this.x+=this.vx; this.y+=this.vy;
     this.group.position.set(this.x,this.y,this.z);
     this.group.rotation.z = Math.atan2(this.vy,this.vx);
-    this.trailHistory.unshift({x:this.x,y:this.y,z:this.z});
-    if(this.trailHistory.length>30) this.trailHistory.pop();
-    const tp = this.trail.geometry.attributes.position.array;
-    for(let i=0;i<30;i++){
-      const h=this.trailHistory[i]||{x:this.x,y:this.y,z:this.z};
-      tp[i*3]=h.x; tp[i*3+1]=h.y; tp[i*3+2]=h.z;
-    }
-    this.trail.geometry.attributes.position.needsUpdate=true;
+    this.trail.update({x:this.x,y:this.y,z:this.z});
     if(this.x>80) this.reset();
   }
 }
@@ -673,13 +1111,17 @@ class AsteroidObj{
     geo.computeVertexNormals();
     const mat = new THREE.MeshPhongMaterial({
       color: new THREE.Color().setHSL(0.07+Math.random()*0.05, 0.3, 0.35),
-      shininess: 10
+      shininess: 25,
+      specular: new THREE.Color(0x8899aa)
     });
     this.mesh = new THREE.Mesh(geo,mat);
     this.reset();
     scene.add(this.mesh);
     this.rotAxis = new THREE.Vector3(Math.random(),Math.random(),Math.random()).normalize();
     this.rotSpeed = (Math.random()-.5)*0.03;
+    this.wobblePhase = Math.random()*Math.PI*2;
+    this.wobbleSpeed = 0.3+Math.random()*0.4;
+    this.wobbleAmount = 0.15+Math.random()*0.2;
   }
   reset(){
     this.mesh.position.set(
@@ -687,18 +1129,21 @@ class AsteroidObj{
       (Math.random()-.5)*60,
       -5 - Math.random()*40
     );
+    this.baseZ = this.mesh.position.z;
     this.vx = (Math.random()-.5)*0.04;
     this.vy = (Math.random()-.5)*0.02;
   }
-  update(){
+  update(t){
     this.mesh.position.x += this.vx;
     this.mesh.position.y += this.vy;
+    // Gentle drifting curve in z so the belt feels tumbled rather than a flat straight-line drift
+    this.mesh.position.z = this.baseZ + Math.sin((t||0)*this.wobbleSpeed + this.wobblePhase) * this.wobbleAmount;
     this.mesh.rotateOnAxis(this.rotAxis, this.rotSpeed);
     const p=this.mesh.position;
     if(p.x>80||p.x<-80||p.y>50||p.y<-50) this.reset();
   }
 }
-const asteroids = Array.from({length:15},()=>new AsteroidObj());
+const asteroids = Array.from({length:Math.max(6, Math.round(15*PARTICLE_SCALE))},()=>new AsteroidObj());
 
 /* ================================================================
    8. COMET
@@ -706,39 +1151,43 @@ const asteroids = Array.from({length:15},()=>new AsteroidObj());
 class CometObj{
   constructor(){
     this.group = new THREE.Group();
-    // Head glow
-    const hTex = makeNebulaTexture('rgba(255,255,255,0.9)','rgba(56,189,248,0)');
+    // Head glow — additive coma, brighter core
+    const hTex = makeNebulaTexture('rgba(255,255,255,0.95)','rgba(56,189,248,0.15)');
     const hMesh = new THREE.Mesh(
       new THREE.PlaneGeometry(1.5,1.5),
-      new THREE.MeshBasicMaterial({map:hTex,transparent:true,depthWrite:false,side:THREE.DoubleSide})
+      new THREE.MeshBasicMaterial({map:hTex,transparent:true,depthWrite:false,side:THREE.DoubleSide,blending:THREE.AdditiveBlending})
     );
     this.group.add(hMesh);
-    // Tail line
-    const tailGeo = new THREE.BufferGeometry();
-    const tp = new Float32Array(40*3);
-    tailGeo.setAttribute('position',new THREE.BufferAttribute(tp,3));
-    this.tailLine = new THREE.Line(tailGeo, new THREE.LineBasicMaterial({color:0x38bdf8,transparent:true,opacity:0.5}));
-    scene.add(this.tailLine);
-    this.history=[];
-    scene.add(this.group);
+    // Tail line — additive so it glows against the dark background instead of just fading
+    this.trail = new Trail(40, new THREE.LineBasicMaterial({color:0x38bdf8,transparent:true,opacity:0.6,blending:THREE.AdditiveBlending}));
+    // Sparse dust particles drifting off the tail for a fuzzier, more physical comet trail
+    const dustCount = 24;
+    const dustGeo = new THREE.BufferGeometry();
+    dustGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(dustCount*3), 3));
+    this.dustPoints = new THREE.Points(dustGeo, new THREE.PointsMaterial({color:0x9fd8ff,size:0.12,transparent:true,opacity:0.5,blending:THREE.AdditiveBlending,sizeAttenuation:true}));
+    this.dustCount = dustCount;
+    scene.add(this.group, this.dustPoints);
     this.reset();
   }
   reset(){
     this.x=-120; this.y=10*(Math.random()-.5); this.z=-8-Math.random()*10;
     this.vx=0.08+Math.random()*0.12; this.vy=(Math.random()-.5)*0.02;
-    this.history=[];
+    this.trail.reset();
   }
   update(){
     this.x+=this.vx; this.y+=this.vy;
     this.group.position.set(this.x,this.y,this.z);
-    this.history.unshift({x:this.x,y:this.y,z:this.z});
-    if(this.history.length>40) this.history.pop();
-    const tp=this.tailLine.geometry.attributes.position.array;
-    for(let i=0;i<40;i++){
-      const h=this.history[i]||{x:this.x,y:this.y,z:this.z};
-      tp[i*3]=h.x; tp[i*3+1]=h.y; tp[i*3+2]=h.z;
+    this.trail.update({x:this.x,y:this.y,z:this.z});
+    // Scatter dust particles loosely along the recent trail history for a soft, wispy tail
+    const arr = this.dustPoints.geometry.attributes.position.array;
+    const hist = this.trail.history;
+    for(let i=0;i<this.dustCount;i++){
+      const h = hist[Math.min((i*1.6)|0, Math.max(hist.length-1,0))] || {x:this.x,y:this.y,z:this.z};
+      arr[i*3]   = h.x + (Math.random()-0.5)*0.4;
+      arr[i*3+1] = h.y + (Math.random()-0.5)*0.4;
+      arr[i*3+2] = h.z + (Math.random()-0.5)*0.4;
     }
-    this.tailLine.geometry.attributes.position.needsUpdate=true;
+    this.dustPoints.geometry.attributes.position.needsUpdate = true;
     if(this.x>130) this.reset();
   }
 }
@@ -749,20 +1198,26 @@ const comets = Array.from({length:2},()=>new CometObj());
 ================================================================ */
 function createWormhole(x,y,z,color){
   const group = new THREE.Group();
+  const rings = [];
   for(let i=5;i>0;i--){
     const rGeo = new THREE.RingGeometry(i*0.5, i*0.5+0.08, 64);
-    const rMat = new THREE.MeshBasicMaterial({color,side:THREE.DoubleSide,transparent:true,opacity:0.15+i*0.04});
-    group.add(new THREE.Mesh(rGeo,rMat));
+    const rMat = new THREE.MeshBasicMaterial({color,side:THREE.DoubleSide,transparent:true,opacity:0.15+i*0.04,blending:THREE.AdditiveBlending});
+    const rMesh = new THREE.Mesh(rGeo,rMat);
+    group.add(rMesh);
+    rings.push({ mesh:rMesh, baseOpacity:0.15+i*0.04 });
   }
-  // Spiral
+  // Spiral — additive so the throat reads as glowing energy rather than a flat line
   const pts=[];
   for(let t=0;t<Math.PI*4;t+=0.08){
     pts.push(new THREE.Vector3(Math.cos(t)*t*0.15, Math.sin(t)*t*0.15, 0));
   }
   const spiralGeo = new THREE.BufferGeometry().setFromPoints(pts);
-  const spiralLine = new THREE.Line(spiralGeo, new THREE.LineBasicMaterial({color,transparent:true,opacity:0.3}));
+  const spiralLine = new THREE.Line(spiralGeo, new THREE.LineBasicMaterial({color,transparent:true,opacity:0.3,blending:THREE.AdditiveBlending}));
   group.add(spiralLine);
   group.position.set(x,y,z);
+  group.userData.rings = rings;
+  group.userData.spiral = spiralLine;
+  group.userData.pulsePhase = Math.random()*Math.PI*2;
   scene.add(group);
   return group;
 }
@@ -773,6 +1228,16 @@ const wh2 = createWormhole( 70,-20,-45, 0x34d399);
    10. AMBIENT + POINT LIGHTS
 ================================================================ */
 scene.add(new THREE.AmbientLight(0x223366, 0.8));
+// Soft sky/ground fill light — rounds out the flat ambient with a hint of directional color
+const hemiLight = new THREE.HemisphereLight(0x8ea6ff, 0x1a0f2e, 0.6);
+scene.add(hemiLight);
+// Distant "sun" key light with a slowly shifting color for a cinematic lighting transition over time
+const keyLight = new THREE.DirectionalLight(0xbfd7ff, 0.9);
+keyLight.position.set(30,40,20);
+scene.add(keyLight);
+const keyColorA = new THREE.Color(0x9fd8ff);
+const keyColorB = new THREE.Color(0xd8b4fe);
+
 const pl1 = new THREE.PointLight(0x38bdf8,2,100);
 pl1.position.set(10,10,5); scene.add(pl1);
 const pl2 = new THREE.PointLight(0xa78bfa,1.5,100);
@@ -782,35 +1247,146 @@ pl2.position.set(-10,-5,5); scene.add(pl2);
    ANIMATION LOOP
 ================================================================ */
 const clock = new THREE.Clock();
-function animate(){
-  requestAnimationFrame(animate);
-  const t = clock.getElapsedTime();
-  const scroll = scrollY / (document.body.scrollHeight - window.innerHeight || 1);
+// Pausing rAF while the tab is hidden avoids burning CPU/GPU/battery on an invisible scene —
+// the clock keeps running so motion resumes smoothly instead of jumping when the tab returns.
+let rafId = null;
+let loopRunning = false;
+document.addEventListener('visibilitychange', ()=>{
+  if(document.hidden){
+    if(rafId !== null) cancelAnimationFrame(rafId);
+    loopRunning = false;
+  } else if(!loopRunning){
+    loopRunning = true;
+    animate();
+  }
+}, { passive:true });
 
-  // Camera parallax
-  camera.position.x += (mouseX*2 - camera.position.x) * 0.02;
-  camera.position.y += (-mouseY*1 - camera.position.y) * 0.02;
-  camera.position.z = 5 + scroll * 15;
-  camera.lookAt(0, 0, -10);
+function animate(){
+  rafId = requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  // ---- CINEMATIC CAMERA ----
+  // dt clamped so a stalled tab / dropped frame can't yank the camera on the next tick — this is what keeps it from ever feeling jerky.
+  const dt = lastFrameT ? Math.min(t - lastFrameT, 0.1) : 1/60;
+  lastFrameT = t;
+
+  // Frame-rate-independent exponential easing (same smoothness at 60Hz, 120Hz, or a stuttering 30Hz).
+  const pointerLambda = 5.5;  // how fast the eased pointer chases the raw pointer
+  const cameraLambda  = 2.6;  // how fast the camera chases its target — this second, slower stage is what reads as "inertia"
+  const pointerEase = 1 - Math.exp(-pointerLambda * dt);
+  const cameraEase  = 1 - Math.exp(-cameraLambda  * dt);
+
+  // Reduced-motion: null the pointer target so parallax eases itself down to zero via the same code path (no branching duplication).
+  const mouseTargetX = prefersReducedMotion ? 0 : mouseX;
+  const mouseTargetY = prefersReducedMotion ? 0 : mouseY;
+  smoothMouseX += (mouseTargetX - smoothMouseX) * pointerEase;
+  smoothMouseY += (mouseTargetY - smoothMouseY) * pointerEase;
+  smoothScrollProgress += (rawScrollProgress - smoothScrollProgress) * cameraEase;
+
+  // Position: mouse drives x/y parallax, scroll drives the z dolly — both eased, so motion carries momentum instead of snapping.
+  cameraTargetPos.set(smoothMouseX * 2.2, -smoothMouseY * 1.2, 5 + smoothScrollProgress * 15);
+  camera.position.x += (cameraTargetPos.x - camera.position.x) * cameraEase;
+  camera.position.y += (cameraTargetPos.y - camera.position.y) * cameraEase;
+  camera.position.z += (cameraTargetPos.z - camera.position.z) * cameraEase;
+
+  // Look-at target drifts on its own plane, opposite the camera's own drift — a second layer of parallax that sells depth.
+  lookAtTarget.set(-smoothMouseX * 1.4, smoothMouseY * 0.7, -10 - smoothScrollProgress * 6);
+  // A clicked nav planet briefly pulls the look-at toward it for a "flying to it" swoop,
+  // then releases back to normal scroll/mouse-driven behavior on its own.
+  if(navFlight.active){
+    const ft = Math.min((t - navFlight.start) / navFlight.duration, 1);
+    if(ft >= 1){ navFlight.active = false; }
+    else{
+      const swoopEase = 1 - Math.pow(1 - ft, 3);
+      lookAtTarget.lerp(navFlight.target, swoopEase * 0.65);
+    }
+  }
+  smoothedLookAt.lerp(lookAtTarget, cameraEase);
+  camera.lookAt(smoothedLookAt);
+
+  // Subtle dutch-angle roll tied to the pointer (capped ~1.1°); tracked separately since lookAt() rewrites rotation.z each frame.
+  const targetRoll = -smoothMouseX * 0.02;
+  cameraRoll += (targetRoll - cameraRoll) * cameraEase;
+  camera.rotation.z += cameraRoll;
+
+  // Gentle FOV narrowing while scrolling in — a dolly-zoom depth cue. Only touches the projection matrix when the value actually moves.
+  const targetFov = CAMERA_BASE_FOV - smoothScrollProgress * (CAMERA_BASE_FOV - CAMERA_DOLLY_FOV);
+  if(Math.abs(camera.fov - targetFov) > 0.01){
+    camera.fov += (targetFov - camera.fov) * cameraEase;
+    camera.updateProjectionMatrix();
+  }
 
   // Stars rotate slowly
   stars1.rotation.y = t * 0.01;
   stars2.rotation.y = t * 0.015;
   stars3.rotation.x = t * 0.008;
 
-  // Planets
+  // Planets — self-rotation, gentle vertical bob, and slow revolution along their orbit ring
   planets.forEach(p=>{
     p.mesh.rotation.y += p.rotSpeed;
-    p.mesh.position.y = p.baseY + Math.sin(t*p.floatSpeed + p.floatPhase)*1.5;
+    p.orbitAngle += p.orbitSpeed * dt;
+    p.mesh.position.x = p.origin.x + Math.cos(p.orbitAngle) * p.orbitRadius;
+    p.mesh.position.z = p.origin.z + Math.sin(p.orbitAngle) * p.orbitRadius;
+    p.mesh.position.y = p.origin.y + Math.sin(t*p.floatSpeed + p.floatPhase)*1.5;
+    // Soft glow breathing for a premium pulsing halo
+    p.glowMesh.material.opacity = 0.55 + Math.sin(t*0.6+p.glowPhase)*0.25;
   });
 
-  // Black holes spin
+  // Section nav planets — orbit + float (reduced under prefers-reduced-motion), hover
+  // response, and keeping each accessible overlay button glued to its planet on screen.
+  const navMotion = prefersReducedMotion ? 0 : 1;
+  navPlanets.forEach(np=>{
+    np.orbitAngle += np.orbitSpeed * dt * navMotion;
+    np.mesh.position.x = np.origin.x + Math.cos(np.orbitAngle) * np.orbitRadius * navMotion;
+    np.mesh.position.z = np.origin.z + Math.sin(np.orbitAngle) * np.orbitRadius * 0.6 * navMotion;
+    np.mesh.position.y = np.origin.y + Math.sin(t*np.floatSpeed + np.floatPhase) * 0.8 * navMotion;
+    np.mesh.rotation.y += np.rotSpeed;
+
+    const targetScale = np.hovered ? 1.18 : 1;
+    np.currentScale += (targetScale - np.currentScale) * 0.12;
+    np.mesh.scale.setScalar(np.currentScale);
+    np.mesh.material.emissiveIntensity = np.hovered ? 0.5 : 0.2;
+    np.glowMesh.material.opacity = (np.hovered ? 0.9 : 0.55) + Math.sin(t*0.6+np.glowPhase)*0.15;
+    np.label.material.opacity = np.hovered ? 1 : 0.85;
+
+    // Project the planet's current world position to screen space so the invisible,
+    // keyboard-focusable button always sits exactly on top of what's visible.
+    const screenPos = np.mesh.getWorldPosition(new THREE.Vector3()).project(camera);
+    if(screenPos.z > 1 || screenPos.z < -1){
+      np.button.style.display = 'none';
+    } else {
+      const sx = (screenPos.x*0.5+0.5) * window.innerWidth;
+      const sy = (1-(screenPos.y*0.5+0.5)) * window.innerHeight;
+      np.button.style.display = '';
+      np.button.style.left = sx+'px';
+      np.button.style.top = sy+'px';
+    }
+  });
+
+  // Black holes spin, plus a slow luminosity pulse on the accretion disk & glow
   bh1.rotation.z += 0.008; bh1.rotation.y += 0.003;
   bh2.rotation.z -= 0.006; bh2.rotation.y += 0.004;
+  [bh1, bh2].forEach(bh=>{
+    const pulse = 0.85 + Math.sin(t*0.5 + bh.userData.pulsePhase)*0.15;
+    bh.userData.disks.forEach(d=> d.mesh.material.opacity = d.baseOpacity * pulse);
+    bh.userData.glow.material.opacity = pulse;
+    bh.userData.ring.material.opacity = 0.75 + Math.sin(t*0.9+bh.userData.pulsePhase)*0.15;
+  });
 
-  // Wormholes spin
+  // Wormholes spin, plus a gentle luminosity pulse through the rings and spiral
   wh1.rotation.z += 0.012; wh1.rotation.x = Math.sin(t*0.3)*0.2;
   wh2.rotation.z -= 0.010; wh2.rotation.x = Math.cos(t*0.25)*0.2;
+  [wh1, wh2].forEach(wh=>{
+    const pulse = 0.8 + Math.sin(t*0.7 + wh.userData.pulsePhase)*0.2;
+    wh.userData.rings.forEach(r=> r.mesh.material.opacity = r.baseOpacity * pulse);
+    wh.userData.spiral.material.opacity = 0.3 * pulse;
+  });
+
+  // Nebula slow drift + soft breathing opacity for galaxy depth
+  nebulaMeshes.forEach(n=>{
+    n.mesh.rotation.z += n.spin;
+    n.mesh.material.opacity = n.baseOpacity * (0.85 + Math.sin(t*0.15+n.phase)*0.15);
+  });
 
   // Meteors
   meteors.forEach(m=>m.update());
@@ -819,133 +1395,171 @@ function animate(){
   satellites.forEach(s=>s.update(t));
 
   // Asteroids
-  asteroids.forEach(a=>a.update());
+  asteroids.forEach(a=>a.update(t));
 
   // Comets
   comets.forEach(c=>c.update());
 
-  // Lights pulse
+  // Lights pulse, plus a slow color drift on the key light for a cinematic transition
   pl1.intensity = 2 + Math.sin(t*0.8)*0.5;
   pl2.intensity = 1.5 + Math.cos(t*0.6)*0.4;
+  const keyMix = (Math.sin(t*0.07)+1)/2;
+  keyLight.color.copy(keyColorA).lerp(keyColorB, keyMix);
 
   renderer.render(scene, camera);
 }
+loopRunning = true;
 animate();
 
-/* ================================================================
-   SCROLL REVEAL
-================================================================ */
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-},{ threshold:0.1 });
-reveals.forEach(r=>observer.observe(r));
+</script>
+
+<!-- ================================================================
+     PREMIUM UI LAYER — GSAP-driven hero, reveals, text, buttons,
+     cards, navigation, hover/micro-interactions and floating details.
+     Purely presentational: does not touch the Three.js scene, the
+     camera, or any portfolio content/text.
+================================================================ -->
+<script>
+(function(){
+  if(typeof gsap === "undefined") return; // graceful no-op if GSAP failed to load; CSS defaults still render fine
+  if(typeof ScrollTrigger !== "undefined") gsap.registerPlugin(ScrollTrigger);
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  gsap.defaults({ ease: "power2.out" });
+
+  /* ── HERO ENTRANCE ───────────────────────────────────────────── */
+  function playHero(){
+    const els = ['.hero-tag', '.hero h1', '.hero-sub', '.hero-btns .btn'];
+    if(reduceMotion){
+      gsap.set(els, { opacity:1, y:0, clearProps:"all" });
+      return;
+    }
+    gsap.set(els, { opacity:0, y:28 });
+    gsap.timeline()
+      .to('.hero-tag', { opacity:1, y:0, duration:0.7 })
+      .to('.hero h1',   { opacity:1, y:0, duration:0.8 }, "-=0.45")
+      .to('.hero-sub',  { opacity:1, y:0, duration:0.7 }, "-=0.45")
+      .to('.hero-btns .btn', { opacity:1, y:0, duration:0.6, stagger:0.12 }, "-=0.35");
+  }
+  // Normal path: wait for the intro loader to finish, then play.
+  window.addEventListener('introComplete', playHero, { once:true });
+  // Safety net: if the intro event never fires for any reason, reveal the hero anyway.
+  setTimeout(()=>{ if(document.getElementById('intro').style.display !== 'none') playHero(); }, 6000);
+
+  /* ── SECTION REVEAL (replaces the old plain fade with a premium staggered entrance) ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  if(reduceMotion || typeof ScrollTrigger === "undefined"){
+    gsap.set(revealEls, { opacity:1, clearProps:"all" });
+  } else {
+    revealEls.forEach(el=>{
+      gsap.fromTo(el, { opacity:0, y:50, scale:0.97 }, {
+        opacity:1, y:0, scale:1, duration:0.9, ease:"power3.out",
+        scrollTrigger:{ trigger: el, start: "top 85%", toggleActions: "play none none reverse" }
+      });
+    });
+  }
+
+  /* ── TEXT ANIMATION — section labels/titles ease up as they enter view ── */
+  if(!reduceMotion && typeof ScrollTrigger !== "undefined"){
+    document.querySelectorAll('.section-label, .section-title').forEach(el=>{
+      gsap.fromTo(el, { opacity:0, y:24 }, {
+        opacity:1, y:0, duration:0.7,
+        scrollTrigger:{ trigger: el, start:"top 88%", toggleActions:"play none none reverse" }
+      });
+    });
+  } else {
+    gsap.set('.section-label, .section-title', { opacity:1, clearProps:"all" });
+  }
+
+  /* ── SKILL BARS — fill from 0 only once their card is visible ── */
+  document.querySelectorAll('.skill-fill').forEach(bar=>{
+    const target = bar.style.width || '0%';
+    if(reduceMotion || typeof ScrollTrigger === "undefined"){
+      bar.style.width = target;
+      return;
+    }
+    gsap.fromTo(bar, { width:'0%' }, {
+      width: target, duration:1.2, ease:"power2.out",
+      scrollTrigger:{ trigger: bar, start:"top 92%", toggleActions:"play none none reverse" }
+    });
+  });
+
+  /* ── FLOATING MICRO-DETAILS — icons/numbers drift gently ── */
+  if(!reduceMotion){
+    document.querySelectorAll('.skill-icon, .project-num, .stat-num').forEach(el=>{
+      gsap.to(el, {
+        y: -6 - Math.random()*4,
+        duration: 2 + Math.random()*1.5,
+        repeat: -1, yoyo: true, ease: "sine.inOut",
+        delay: Math.random()*1.5
+      });
+    });
+  }
+
+  /* ── BUTTONS — magnetic hover lift + ripple micro-interaction ── */
+  document.querySelectorAll('.btn').forEach(btn=>{
+    if(!reduceMotion){
+      btn.addEventListener('mouseenter', ()=> gsap.to(btn, { y:-4, scale:1.05, duration:0.35, ease:"power2.out" }));
+      btn.addEventListener('mouseleave', ()=> gsap.to(btn, { y:0, scale:1, duration:0.4, ease:"power2.out" }));
+    }
+    btn.addEventListener('click', function(e){
+      const rect = btn.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      ripple.style.cssText = `position:absolute;border-radius:50%;pointer-events:none;
+        width:12px;height:12px;background:rgba(255,255,255,0.55);
+        left:${e.clientX-rect.left-6}px;top:${e.clientY-rect.top-6}px;`;
+      btn.appendChild(ripple);
+      gsap.to(ripple, {
+        scale:14, opacity:0, duration:0.6, ease:"power2.out",
+        onComplete:()=> ripple.remove()
+      });
+    });
+  });
+
+  /* ── CARDS — subtle pointer-tilt + lift (desktop only; skipped on touch/reduced-motion) ── */
+  const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  if(!reduceMotion && !isTouch){
+    document.querySelectorAll('.stat-box, .skill-card, .project-card, .contact-item').forEach(card=>{
+      const rotX = gsap.quickTo(card, "rotationX", { duration:0.5, ease:"power2.out" });
+      const rotY = gsap.quickTo(card, "rotationY", { duration:0.5, ease:"power2.out" });
+      const liftY = gsap.quickTo(card, "y", { duration:0.5, ease:"power2.out" });
+      card.style.transformPerspective = '700px';
+      card.style.transformStyle = "preserve-3d";
+      card.addEventListener('mousemove', e=>{
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        rotY(px * 8);
+        rotX(-py * 8);
+      });
+      card.addEventListener('mouseenter', ()=> liftY(-6));
+      card.addEventListener('mouseleave', ()=>{
+        rotX(0); rotY(0); liftY(0);
+      });
+    });
+  }
+
+  /* ── NAVIGATION — animated underline on the header links ── */
+  document.querySelectorAll('nav a').forEach(a=>{
+    const underline = document.createElement('span');
+    underline.className = 'nav-underline';
+    a.appendChild(underline);
+    if(!reduceMotion){
+      a.addEventListener('mouseenter', ()=> gsap.to(underline, { scaleX:1, duration:0.35, ease:"power2.out" }));
+      a.addEventListener('mouseleave', ()=> gsap.to(underline, { scaleX:0, duration:0.3, ease:"power2.in" }));
+      a.addEventListener('focus', ()=> gsap.to(underline, { scaleX:1, duration:0.3 }));
+      a.addEventListener('blur', ()=> gsap.to(underline, { scaleX:0, duration:0.25 }));
+    }
+  });
+
+  /* ── CONTACT SEND BUTTON — small confirm pulse on click, purely visual ── */
+  const sendBtn = document.querySelector('.contact-box .btn-primary');
+  if(sendBtn && !reduceMotion){
+    sendBtn.addEventListener('click', ()=>{
+      gsap.fromTo(sendBtn, { scale:1 }, { scale:1.08, duration:0.15, yoyo:true, repeat:1, ease:"power1.inOut" });
+    });
+  }
+})();
 </script>
 </body>
-</html>nergy and shot length.  
-- **Loudness and Silence:** We compute a **loudness profile** (RMS or LUFS) over time to find quiet sections, dialogue, or music-free passages.  Voice activity detection (VAD) separates speech from ambience.  Dialogue tends to sit around –12 to –15 dB (integrated), music ~–18 dB, and SFX at peaks (–8 dB).  We note any silent or low-volume intervals that may need underscore or Foley.  
-- **Scene List with Timestamps:** Based on the above, we create a scene list. *Example*: Scene 1 (0:00–0:15) – Opening Titles; Scene 2 (0:15–1:15) – Scenic Montage; Scene 3 (1:15–2:45) – Interview; Scene 4 (2:45–4:15) – Action Sequence; Scene 5 (4:15–4:30) – Closing Credits. (Actual times depend on video length; here we assume an ~4:30 video.)  Each scene’s visual style and pacing is recorded for reference.  
-
-## 2. Music Track Selection and Editing (by Scene)  
-For each scene we recommend a **primary full-length music track** and two alternates.  All cited tracks are royalty-free with clear licensing.
-
-- **Scene 1 (Opening Titles, 0:00–0:15):** Mood = upbeat, energetic corporate style.  
-  - *Primary:* **“Happy Rock”** by Benjamin Tissot (Bensound) – a lively, guitar-driven rock track. (Length ~1:45.)  Available royalty-free (free download; attribution required as per [Bensound](https://www.bensound.com) policies). [Spotify/YouTube Preview: open.spotify.com/track/0ef8c46W0YFMj63pdI40Qt].  
-  - *Alt 1:* **“Motivation”** by The_Mountain (Pixabay) – an upbeat motivational track with guitar and piano (Pixabay CC0 license). (1:56)  
-  - *Alt 2:* **“Motivation Epic Rock”** by AlexGrohl (Pixabay) – similar style, high-energy rock (1:59).  
-  *Edit cues:* Fade in from silence at 0:00. Cut music at 0:15 (end of titles), or slightly overlap into Scene 2. If necessary, time-stretch/warp to match cutting rhythms. The key and tempo of the track should match on-screen motion; minor pitch/tempo shift is possible via DAW.  
-
-- **Scene 2 (Scenic Montage, 0:15–1:15):** Mood = bright, inspiring travel or landscape montage.  
-  - *Primary:* **“Motivation”** by The_Mountain (Pixabay) – carries momentum from Scene 1, underpins visuals.  
-  - *Alt 1:* **“Motivation Epic Rock”** (Pixabay) – alternative rock-driven vibe.  
-  - *Alt 2:* **“Happy Rock”** (Bensound) – reprise upbeat tone.  
-  *Edit cues:* Begin track at 0:15. Use a **whoosh SFX** (See next section) to transition into music. If the montage is longer (e.g. 60s), loop or continue the track; fade out at 1:15 or crossfade into next scene music. Ensure music matches visuals (if slow pan, fade to quieter passage; if quick cuts, emphasize beat).  
-
-- **Scene 3 (Interview/Indoor, 1:15–2:45):** Mood = moderate pace, intimate or documentary feel.  
-  - *Primary:* **“Piano Motivation”** by AtlasAudio (Pixabay) – gentle modern-classical piano, uplifting tone (2:02).  
-  - *Alt 1:* **“Talking About Love”** by TolsetMusic (Pixabay) – romantic piano background (2:08).  
-  - *Alt 2:* **“Motivation On”** by AtlasAudio (Pixabay) – cinematic piano (2:20).  
-  *Edit cues:* Start gently around 1:15 under dialogue (duck music ~–20 dB while person speaks, per mixing practice). Use fade or crossfade if needed. If there is a silent portion after dialogue, consider raising the piano for a short phrase. Key change not likely needed; ensure the piano tempo is steady.  
-
-- **Scene 4 (Action Sequence, 2:45–4:15):** Mood = intense, dynamic.  
-  - *Primary:* **“Epic Cinematic Thriller”** by trailer-score-room (Pixabay) – dramatic orchestral trailer music (2:40).  
-  - *Alt 1:* **“Motivation Epic Rock”** (Pixabay) – (the alt from Scene 2) for rock action feel.  
-  - *Alt 2:* **“Gaming Rock”** by alex-morgan (Pixabay) – high-energy rock instrumental (1:50).  
-  *Edit cues:* Align musical hits with on-screen action beats (e.g. switch to chorus during climax). Add **tempo sync** if cutting is fast: slightly stretch music to fit sequence length, or use bars/cuts on beat. At 4:15 fade out or cut to next scene.  
-
-- **Scene 5 (Closing Credits, 4:15–4:30):** Mood = calm, reflective.  
-  - *Primary:* **“Ambient”** by leberch (Pixabay) – soft ambient piano (2:04).  
-  - *Alt 1:* **“Calm Piano”** by alex-morgan (Pixabay) – gentle solo piano (1:58).  
-  - *Alt 2:* **“Father’s Day”** by SigmaMusicArt (Pixabay) – sentimental piano (2:17).  
-  *Edit cues:* Fade music in at 4:15, layering softly under credits. Keep levels low (~–22 dB average) for a gentle end. No tempo/key changes needed.  
-
-*Licensing:* All pixabay tracks are CC0/royalty-free (free use). Bensound tracks are free with attribution (commercial license available). Provide direct links to each track’s source page (e.g. pixabay.com/music/…).  
-
-## 3. Sound Effects (SFX) by Scene/Transition  
-We specify per transition or scene:  
-
-- **Scene transitions:** Typically use quick “whoosh” or “swoosh” effects for cuts. For example, a short *“whoosh”* at 0:15 (titles→montage), 1:15 (montage→interview), 2:45 (interview→action), and 4:15 (action→credits). Use **Mixkit’s free whoosh SFX** (all free under the Mixkit license). For instance, *“Arrow Whoosh”* or *“Cinematic Whoosh Transition”* from Mixkit, ~1–3 s long. Layer at about –6 dB (peak ~–3 dB) under the cut.  
-- **Scene 2 (Montage) ambience:** Layer subtle ambient nature sounds (birds chirping, wind) throughout. E.g. *“Nature Ambience”* (Pixabay SFX, CC0). Play at low level (–20 to –18 dB) as background under music.  
-- **Scene 3 (Interview background):** Add room tone or soft “office hum.” (e.g. low-volume *“indoor murmur”* from Pixabay) to fill silence. Keep very quiet so dialogue stands out.  
-- **Scene 4 (Action):** Use specific impacts. For a fight punch at 3:00, layer a *“Punch Impact”* SFX (Pixabay “Hard Punch SFX”) at cut (–10 dB). For footsteps or mechanical sounds, use corresponding SFX (Pixabay has free categories). Level SFX higher than music (–10 to –8 dB peaks) to emphasize action.  
-- **Scene 5 (Credits):** Possibly no SFX, or a very subtle ambient bed (e.g. soft wind or distant thunder at –25 dB).  
-
-*Layering:* Follow industry practice: dialogue ~–12 dB, music ~–18 dB, SFX ~–10 dB peaks. Duck or sidechain music under dialogue when needed.  
-
-All chosen SFX come from royalty-free libraries. Mixkit’s SFX are free under their license. Pixabay SFX (nature, crowd, punch, etc.) are free to use without attribution.
-
-## 4. Visual Enhancements / Photo Replacements  
-To match the audio changes, we propose **visual adjustments**:
-
-- **Color Grading:** Sync color tone to music mood. e.g. punch up saturation and contrast for vibrant montage (bright, warm palette with “Happy Rock” music). Desaturate/interpose cooler tones for interview (softer piano). Use vignette or film grain subtly on narrative scenes for cinematic feel.  
-- **Stock Image Replacements:** If any scene visuals are low-quality or generic, swap with high-res stock images. For example: if Scene 2 shows a cloudy sky, replace with a vibrant sunrise photo from Unsplash. (Unsplash images are free to use for commercial projects.) For an interview background, consider a blurred office photo from Pexels/Pixabay to add depth. *Example stock*: a misty mountain sunrise (Unsplash) or a modern office interior (Pixabay). These free image sites have millions of CC0 images.  
-- **Mockup Descriptions:** Suppose the video’s Scene 2 has a shot of trees: we might replace it with **before/after** “green forest at dawn” (Unsplash) to better convey morning freshness matching the upbeat music. We’d describe: *Before: dimly lit wood; After: bright forest with golden light (Unsplash).* Similarly, if Scene 4 uses a building backdrop during action, we could overlay motion blur or insert a dynamic cityscape to enhance intensity.  
-- **Stock Sources:** We recommend using free sites: **Unsplash** (CC0, commercial use free), **Pexels/Pixabay** (free licenses). For example, Unsplash’s license explicitly allows commercial use without permission.  
-
-## 5. Timeline / Tracklist (Diagram and Table)  
-
-```mermaid
-gantt
-    dateFormat  s
-    title Example Video Timeline
-    section Scenes
-    Opening Titles        : op, 0s, 15s
-    Scenic Montage        : sm, after op, 60s
-    Interview             : in, after sm, 90s
-    Action Sequence       : ac, after in, 90s
-    Closing Credits       : cr, after ac, 15s
-    section Music
-    Upbeat Corporate      : mu1, 0s, 135s
-    Emotional Ambient     : mu2, after mu1, 90s
-    Cinematic Action      : mu3, after mu2, 60s
-    section SFX
-    Whoosh Transition     : sfx1, 75s, 2s
-    Nature Ambience       : sfx2, 15s, 60s
-    Crowd Murmur          : sfx3, 80s, 5s
-```
-
-| Time (mm:ss)      | Scene               | Music (Primary; Alt1; Alt2)                    | SFX (timestamp, level)                        | Visual Notes                   |
-|-------------------|---------------------|-----------------------------------------------|-----------------------------------------------|--------------------------------|
-| 00:00–00:15       | Opening Titles      | “Happy Rock” (Bensound); *Motivation* (Pixabay); *Epic Rock* (Pixabay) | Title logo whoosh (0:00, –3 dB) | Title background (consider a bold static image). |
-| 00:15–01:15       | Scenic Montage      | *Motivation* (Pixabay); *Epic Rock* (Pixabay); *Happy Rock* (Bensound) | Fast whoosh at 0:15 (–6 dB) to cut in; Nature ambience bed (15–75s, –18 dB) | Replace with high-res sunrise or forest stock (Unsplash) for vibrancy. |
-| 01:15–02:45       | Interview           | “Piano Motivation” (Pixabay); *Talking About Love* (Pixabay); *Motivation On* (Pixabay) | Whoosh at 1:15 (–6 dB); low hum/office murmur (1:20–2:45, –22 dB) | Soft, warm color grade; optionally blurred office background from Pexels/Pixabay. |
-| 02:45–04:15       | Action Sequence     | “Epic Cinematic Thriller” (Pixabay); *Motivation Epic Rock*; *Gaming Rock* (Pixabay) | Whoosh at 2:45 (–6 dB); Punch SFX at 3:00 (–10 dB); car/running SFX as needed | Increase contrast; add motion blur; optional dynamic cityscape overlay. |
-| 04:15–04:30       | Credits             | “Ambient” (Pixabay); *Calm Piano* (Pixabay); *Father’s Day* (Pixabay) | Gentle wind or silence; no abrupt SFX | Fade to black on credits; use serene stock background (e.g. starry sky). |
-
-*(Levels in table are approximate; mix such that dialogue ~–12 dB, music ~–18 dB, SFX –8 dB peaks.)*  
-
-## 6. Effort, Time, and Tools  
-- **Effort Estimate:** 10–20 hours of work. This includes ~1–2 hours scene/audio analysis, 3–5 hours music/SFX selection and editing per scene, and ~2–4 hours of audio mixing and refining.  
-- **Recommended Tools:**  
-  - Video Editor: Adobe Premiere Pro or DaVinci Resolve (for timeline editing, crossfades, color grading).  
-  - DAW/Audio Editor: Ableton Live, Logic, or Adobe Audition for precise audio editing, tempo/key adjustments, and mixing levels.  
-  - Libraries: Built-in stock libraries (Premiere’s Essential Sound panel), plus **Mixkit**, **Pixabay**, **Freesound.org** for SFX, and **Bensound/Pixabay** for music tracks. (Freesound is a CC-licensed SFX community.)  
-  - Plugins: iZotope RX for noise reduction (if needed), and VST tuners/tempo analyzers (e.g. Mixed In Key) for matching BPM.  
-  - **PySceneDetect** (Python) or FFmpeg for batch scene detection.  
-
-Adjustments like tempo matching (time-stretch) and key shifting can be done via the DAW (e.g. Ableton’s Warp, Audition’s Stretch).  For quick SFX mixing, consider an audio middleware or bus routing to set consistent levels.  
-
-All cited tracks and images above are from royalty-free sources: e.g. **Unsplash** (CC0 free images), **Pixabay** (music/SFX/images CC0), **Mixkit** (free SFX under Mixkit license), and **Bensound** (free with credit).  
-
-**Sources:** We relied on industry guidelines and literature for audio-visual editing (e.g. film scoring techniques, scene pacing) and official content libraries (Pixabay license, Unsplash license). The specific music and SFX examples above come from those libraries’ catalogs (links provided). Mixing levels are based on expert recommendations. All information is cited from authoritative sources and the referenced websites.  
-
+</html>
